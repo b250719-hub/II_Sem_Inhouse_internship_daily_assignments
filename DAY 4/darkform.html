@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Landing Page</title>
+     <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    header {
+    background: #333;
+    color: white;
+    width: 100%;
+}
+nav{
+    display: flex;
+    justify-content:space-evenly;
+    align-items:center;
+    padding:15px 30px;
+}
+nav button{
+    width:auto;
+    padding:10px 20px;
+} 
+
+nav h1{
+    margin:0;
+}
+     .navbar{
+        box-shadow:0 2px 10px rgba(0,0,0,.1);
+    }
+    main {
+    padding: 30px;
+}
+section{
+    width:350px;
+    padding:25px;
+    }
+    body{
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+    color:black;
+    transition:0.4s;
+}
+input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+}
+
+button{
+    width:100%;
+    padding:10px;
+    cursor:pointer;
+}
+form button{
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+small{
+    color:red;
+}
+
+.dark{
+    background:#222;
+    color:white;
+}
+
+.dark .container{
+    background:#333;
+}
+
+.dark input{
+    background:#555;
+    color:white;
+    border:1px solid white;
+}
+</style>
+<body>
+    <header>
+        <nav>
+        <h1>My Landing Page</h1>
+        <button id="themeBtn">🌙switch to dark</button>
+    </nav>
+    </header>
+    <main>
+    <section>
+        <h2>Form Validation</h2>
+        <form id="regForm">
+            <div>
+                <label >Name:</label><br>
+                <input type="text" id="name" placeholder="Enter your name">
+                <small id="nameError" class="error">Name is required</small>
+            </div>
+            <br>
+            <div>
+                <label>Emali:</label><br>
+                <input type="email" id="email" placeholder="Enter email">
+                <small id="emailError" class="error">Email is required</small>
+            </div>
+            <br>
+            <div>
+                <label>Password:</label><br>
+                <input type="password" id="password" placeholder="Enter password">
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+    </main>
+</body>
+<script>
+// Name Validation
+
+const form = document.getElementById("regForm");
+
+form.addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    let name = document.getElementById("name").value.trim();
+    let error = document.getElementById("nameError");
+
+    // Name should contain only alphabets and spaces
+    let regex = /^[A-Za-z ]+$/;
+
+    if(name === ""){
+        error.innerHTML = "Name is required";
+    }
+    else if(name.length < 3){
+        error.innerHTML = "Name must be at least 3 characters";
+    }
+    else if(!regex.test(name)){
+        error.innerHTML = "Only letters and spaces are allowed";
+    }
+    else{
+        error.innerHTML = "";
+        alert("Registration Successful!");
+    }
+
+});
+
+
+// Dark Mode Toggle
+
+const btn = document.getElementById("themeBtn");
+
+btn.addEventListener("click", function(){
+
+    document.body.classList.toggle("dark");
+
+    if(document.body.classList.contains("dark")){
+        btn.innerHTML = "☀️ Light Mode";
+    }else{
+        btn.innerHTML = "🌙 Dark Mode";
+    }
+
+});
+</script>
+</html>
